@@ -20,11 +20,4 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/application/DiagramaPrestamos.xmi</name>
-			<type>1</type>
-			<location>C:/Users/corre/OneDrive/Escritorio/DiagramaPrestamos.xmi</location>
-		</link>
-	</linkedResources>
 </projectDescription>
