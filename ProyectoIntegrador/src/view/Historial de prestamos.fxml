@@ -6,21 +6,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="controller.HistorialPrestamosController">
    <center>
       <AnchorPane prefHeight="403.0" prefWidth="558.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="344.0" prefWidth="558.0">
+            <TableView fx:id="tablaHistorial" layoutX="0.0" layoutY="0.0" prefHeight="344.0" prefWidth="558.0">
               <columns>
-                <TableColumn prefWidth="78.0" text="Solicitante" />
-                <TableColumn prefWidth="95.0" text="Fecha y Hora" />
-                  <TableColumn prefWidth="126.0" text="Tipo de prestamo" />
-                  <TableColumn prefWidth="258.0" text="Estado (pendiente, aprobado, rechazado)" />
+                <TableColumn fx:id="colSolicitante" prefWidth="78.0" text="Solicitante" />
+                <TableColumn fx:id="colFecha" prefWidth="95.0" text="Fecha y Hora" />
+                <TableColumn fx:id="colTipo" prefWidth="126.0" text="Tipo de préstamo" />
+                <TableColumn fx:id="colEstado" prefWidth="258.0" text="Estado" />
               </columns>
             </TableView>
-            <Button layoutX="104.0" layoutY="355.0" mnemonicParsing="false" text="Filtrar Fechas" />
-            <Button layoutX="349.0" layoutY="355.0" mnemonicParsing="false" text="Ver detalles" />
+            <Button fx:id="btnFiltrar" layoutX="104.0" layoutY="355.0" text="Filtrar Fechas" />
+            <Button fx:id="btnDetalles" layoutX="349.0" layoutY="355.0" text="Ver detalles" />
          </children>
       </AnchorPane>
    </center>

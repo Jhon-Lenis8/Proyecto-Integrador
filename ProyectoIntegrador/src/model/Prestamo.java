@@ -34,4 +34,9 @@ public class Prestamo {
     public String getEstado() { return estado; }
 
     public void setEstado(String estado) { this.estado = estado; }
+
+	public void setFechaDevolucion(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		
+	}
 }

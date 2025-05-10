@@ -8,21 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="controller.DevolucionController">
    <center>
       <AnchorPane prefHeight="413.0" prefWidth="441.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="272.0" prefWidth="441.0">
+            <TableView fx:id="tablaDevoluciones" layoutX="0.0" layoutY="0.0" prefHeight="272.0" prefWidth="441.0">
               <columns>
-                <TableColumn prefWidth="106.0" text="Solicitante" />
-                <TableColumn prefWidth="141.0" text="Tipo de prestamo" />
-                  <TableColumn prefWidth="191.0" text="Fecha de devolucion esperada" />
+                <TableColumn fx:id="colSolicitante" prefWidth="106.0" text="Solicitante" />
+                <TableColumn fx:id="colTipoPrestamo" prefWidth="141.0" text="Tipo de préstamo" />
+                <TableColumn fx:id="colFechaEsperada" prefWidth="191.0" text="Fecha de devolución esperada" />
               </columns>
             </TableView>
-            <Button layoutX="279.0" layoutY="348.0" mnemonicParsing="false" text="Registrar devolucion" />
-            <CheckBox layoutX="270.0" layoutY="303.0" mnemonicParsing="false" text="Equipo en buen estado" />
-            <TextArea layoutX="8.0" layoutY="283.0" prefHeight="99.0" prefWidth="238.0" />
+            <Button fx:id="btnRegistrarDevolucion" layoutX="279.0" layoutY="348.0" text="Registrar devolución" />
+            <CheckBox fx:id="chkBuenEstado" layoutX="270.0" layoutY="303.0" text="Equipo en buen estado" />
+            <TextArea fx:id="txtObservaciones" layoutX="8.0" layoutY="283.0" prefHeight="99.0" prefWidth="238.0" />
          </children>
       </AnchorPane>
    </center>
