@@ -7,24 +7,27 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="controller.SancionesController">
    <center>
       <AnchorPane prefHeight="467.0" prefWidth="490.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="240.0" prefWidth="490.0">
+            <TableView fx:id="tablaSanciones" layoutX="0.0" layoutY="0.0" prefHeight="240.0" prefWidth="490.0">
               <columns>
-                <TableColumn prefWidth="138.0" text="Motivo" />
-                <TableColumn prefWidth="139.0" text="Fecha" />
-                  <TableColumn prefWidth="212.0" text="Estado (Activa/Inactiva)" />
+                <TableColumn fx:id="colMotivo" prefWidth="138.0" text="Motivo"/>
+                <TableColumn fx:id="colFecha" prefWidth="139.0" text="Fecha"/>
+                <TableColumn fx:id="colEstado" prefWidth="212.0" text="Estado (Activa/Inactiva)"/>
               </columns>
             </TableView>
-            <Label layoutX="133.0" layoutY="248.0" text="Politicas de sanciones">
+            <Label layoutX="133.0" layoutY="248.0" text="Políticas de sanciones">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="25.0"/>
                </font>
             </Label>
-            <Label layoutX="68.0" layoutY="284.0" prefHeight="161.0" prefWidth="369.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="lblPoliticas" layoutX="68.0" layoutY="284.0" prefHeight="161.0" prefWidth="369.0"
+                   text="Si el usuario entrega un equipo dañado o no cumple con los plazos, se activará una sanción temporal que bloqueará sus futuros préstamos." 
+                   wrapText="true" textAlignment="CENTER"/>
          </children>
       </AnchorPane>
    </center>
