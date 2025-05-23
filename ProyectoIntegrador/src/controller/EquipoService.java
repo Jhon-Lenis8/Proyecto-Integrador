@@ -1,5 +1,9 @@
 package controller;
+<<<<<<< HEAD
 //prueba para el push
+=======
+
+>>>>>>> branch 'master' of https://github.com/Jhon-Lenis8/Proyecto-Integrador.git
 import model.EquipoAudiovisual;
 
 import java.util.ArrayList;

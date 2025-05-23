@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
+<<<<<<< HEAD
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
    <center>
@@ -21,6 +22,24 @@
             </TableView>
             <Button layoutX="87.0" layoutY="362.0" mnemonicParsing="false" text="Aprobar" />
             <Button layoutX="372.0" layoutY="362.0" mnemonicParsing="false" text="Rechazar" />
+=======
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="controller.AprobacionPrestamosController">
+   <center>
+      <AnchorPane prefHeight="401.0" prefWidth="538.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tablaPrestamos" layoutX="0.0" layoutY="0.0" prefHeight="351.0" prefWidth="538.0">
+              <columns>
+                <TableColumn fx:id="colUsuario" prefWidth="75.0" text="Solicitante"/>
+                <TableColumn fx:id="colTipo" prefWidth="117.0" text="Tipo de préstamo"/>
+                <TableColumn fx:id="colFecha" prefWidth="91.0" text="Fecha y Hora"/>
+                <TableColumn fx:id="colEstado" prefWidth="253.0" text="Estado"/>
+              </columns>
+            </TableView>
+            <Button fx:id="btnAprobar" layoutX="87.0" layoutY="362.0" mnemonicParsing="false" text="Aprobar"/>
+            <Button fx:id="btnRechazar" layoutX="372.0" layoutY="362.0" mnemonicParsing="false" text="Rechazar"/>
+>>>>>>> branch 'master' of https://github.com/Jhon-Lenis8/Proyecto-Integrador.git
          </children>
       </AnchorPane>
    </center>

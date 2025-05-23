@@ -34,4 +34,12 @@ public class Prestamo {
     public String getEstado() { return estado; }
 
     public void setEstado(String estado) { this.estado = estado; }
+<<<<<<< HEAD
+=======
+
+	public void setFechaDevolucion(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		
+	}
+>>>>>>> branch 'master' of https://github.com/Jhon-Lenis8/Proyecto-Integrador.git
 }
