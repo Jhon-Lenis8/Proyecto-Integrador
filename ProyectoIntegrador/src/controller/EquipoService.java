@@ -1,5 +1,5 @@
 package controller;
-//prueba para el commit
+//prueba para el push
 import model.EquipoAudiovisual;
 
 import java.util.ArrayList;
