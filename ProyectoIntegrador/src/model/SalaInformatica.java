@@ -22,4 +22,9 @@ public class SalaInformatica {
     public String getEstadoActual() { return estadoActual; }
 
     public void setEstadoActual(String estadoActual) { this.estadoActual = estadoActual; }
+    
+    // Agregar el método setSoftwareDisponible para corregir el error
+    public void setSoftwareDisponible(String softwareDisponible) { 
+        this.softwareDisponible = softwareDisponible; 
+    }
 }

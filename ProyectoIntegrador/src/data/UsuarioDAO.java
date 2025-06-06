@@ -1,62 +1,46 @@
 package data;
 
+import model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.Usuario;
 
 public class UsuarioDAO {
 
-    private Connection conn;
+    public boolean insertarUsuario(Usuario usuario, String contrasena) {
+        String sql = "INSERT INTO USUARIO (IDENTIFICACION, NOMBRE, APELLIDO, CORREO, TIPO_USUARIO, CONTRASENA) VALUES (?, ?, ?, ?, ?, ?)";
 
-    public UsuarioDAO() {
-        conn = DBConnection.getConnection();
-    }
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-    // Insertar usuario
-    public boolean insertarUsuario(Usuario usuario) {
-        String sql = "INSERT INTO usuarios (id_usuario, nombre, correo, contrasena, rol) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, usuario.getIdentificacion());
-            stmt.setString(2, usuario.getNombre() + " " + usuario.getApellido());
-            stmt.setString(3, usuario.getCorreoElectronico());
-            stmt.setString(4, "sin_clave"); 
+            stmt.setString(2, usuario.getNombre());
+            stmt.setString(3, usuario.getApellido());
+            stmt.setString(4, usuario.getCorreoElectronico());
             stmt.setString(5, usuario.getTipoUsuario());
-            stmt.executeUpdate();
-            return true;
+            stmt.setString(6, cifrarContrasena(contrasena));
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+
         } catch (SQLException e) {
-            System.err.println("Error al insertar usuario:");
-            e.printStackTrace();
+            System.err.println("Error al insertar usuario: " + e.getMessage());
             return false;
         }
     }
 
-    // Buscar usuario por ID
-    public Usuario buscarPorId(String idUsuario) {
-        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, idUsuario);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                String[] nombrePartes = rs.getString("nombre").split(" ", 2);
-                String nombre = nombrePartes.length > 0 ? nombrePartes[0] : "";
-                String apellido = nombrePartes.length > 1 ? nombrePartes[1] : "";
-
-                return new Usuario(
-                    rs.getString("id_usuario"),
-                    nombre,
-                    apellido,
-                    rs.getString("rol"),
-                    rs.getString("correo"),
-                    "sin_telefono"
-                );
+    private String cifrarContrasena(String contrasena) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(contrasena.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
             }
-        } catch (SQLException e) {
-            System.err.println("Error al buscar usuario:");
-            e.printStackTrace();
+            return hexString.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+            System.err.println("Error al cifrar la contraseña: " + e.getMessage());
+            return null;
         }
-        return null;
     }
-
 }

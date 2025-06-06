@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.RegistroUsuarioController"
+            stylesheets="@/style.css">
+
+    <center>
+        <VBox alignment="CENTER" spacing="12" padding="20" BorderPane.alignment="CENTER">
+            <Label text="Registro de Usuario" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+            <HBox spacing="10">
+                <Label text="Identificación:"/>
+                <TextField fx:id="txtIdentificacion" prefWidth="200"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Contraseña:"/>
+                <PasswordField fx:id="txtContrasena" prefWidth="200"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Nombre:"/>
+                <TextField fx:id="txtNombre" prefWidth="200"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Apellido:"/>
+                <TextField fx:id="txtApellido" prefWidth="200"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Correo electrónico:"/>
+                <TextField fx:id="txtCorreo" prefWidth="200"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Tipo de usuario:"/>
+                <ComboBox fx:id="comboTipo" prefWidth="200"/>
+            </HBox>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="btnRegistrar" text="Registrar usuario"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

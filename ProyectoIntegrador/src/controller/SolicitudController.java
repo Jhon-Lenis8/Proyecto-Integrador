@@ -1,82 +1,99 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import model.Prestamo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.UUID;
 
 public class SolicitudController {
 
-    @FXML private ComboBox<String> comboTipoPrestamo;
-    @FXML private TextField txtNombreSolicitante;
-    @FXML private ComboBox<String> comboRecurso;
-    @FXML private DatePicker fechaPrestamo;
-    @FXML private ComboBox<String> comboHorario;
+    @FXML private ComboBox<String> comboTipo;
+    @FXML private ComboBox<String> comboEquipo;
+    @FXML private DatePicker fechaInicio;
+    @FXML private ComboBox<String> horaInicio;
+    @FXML private DatePicker fechaFin;
+    @FXML private ComboBox<String> horaFin;
     @FXML private TextArea txtMotivo;
-    @FXML private Button btnEnviarSolicitud;
+    @FXML private Button btnRegistrar;
+    @FXML private Button btnVolver;
+    @FXML private TextField txtNombreSolicitante;
 
-    private final PrestamoService prestamoService = new PrestamoService();
 
     @FXML
     public void initialize() {
-        comboTipoPrestamo.getItems().addAll("Audiovisual", "Sala de informatica");
-        comboRecurso.getItems().addAll("Proyector", "Sala 101", "Cámara", "Laboratorio de Video");
-        comboHorario.getItems().addAll("08:00-10:00", "10:00-12:00", "14:00-16:00");
+        // Cargar opciones
+        comboTipo.getItems().addAll("Audiovisual", "Sala Informática");
+        comboEquipo.getItems().addAll("Proyector", "Sala 101", "Cámara", "Laboratorio de Video");
+        horaInicio.getItems().addAll("08:00", "10:00", "14:00");
+        horaFin.getItems().addAll("10:00", "12:00", "16:00");
 
-        btnEnviarSolicitud.setOnAction(e -> procesarSolicitud());
+        btnRegistrar.setOnAction(this::registrarPrestamo);
+        btnVolver.setOnAction(this::irAlMenuPrincipal);
     }
 
-    private void procesarSolicitud() {
-        String tipo = comboTipoPrestamo.getValue();
-        String nombre = txtNombreSolicitante.getText().trim();
-        String recurso = comboRecurso.getValue();
-        LocalDate fecha = fechaPrestamo.getValue();
-        String horario = comboHorario.getValue();
-        String motivo = txtMotivo.getText().trim();
+    @FXML
+    private void registrarPrestamo(ActionEvent event) {
+        String tipo = comboTipo.getValue();
+        String recurso = comboEquipo.getValue();
+        LocalDate fInicio = fechaInicio.getValue();
+        LocalDate fFin = fechaFin.getValue();
+        String hInicio = horaInicio.getValue();
+        String hFin = horaFin.getValue();
+        String motivo = txtMotivo.getText();
 
-        if (tipo == null || nombre.isEmpty() || recurso == null || fecha == null || horario == null || motivo.isEmpty()) {
-            mostrarAlerta("Por favor complete todos los campos.", Alert.AlertType.WARNING);
+        if (tipo == null || recurso == null || fInicio == null || fFin == null || hInicio == null || hFin == null || motivo.isEmpty()) {
+            mostrarAlerta("Por favor, complete todos los campos.", Alert.AlertType.WARNING);
             return;
         }
 
-        String idPrestamo = UUID.randomUUID().toString().substring(0, 8);
-        String idUsuario = nombre.replaceAll("\\s+", "").toLowerCase(); // ejemplo
-        String idRecurso = recurso.replaceAll("\\s+", "").toUpperCase();
+        // Simular registro (esto luego se reemplazará con lógica real + base de datos)
+        LocalDateTime fechaHoraInicio = LocalDateTime.of(fInicio, LocalTime.parse(hInicio));
+        LocalDateTime fechaHoraFin = LocalDateTime.of(fFin, LocalTime.parse(hFin));
 
-        LocalTime horaInicio = LocalTime.parse(horario.split("-")[0]);
-        LocalDateTime fechaSolicitud = LocalDateTime.now();
-        LocalDateTime fechaUso = LocalDateTime.of(fecha, horaInicio);
-
-        Prestamo nuevo = new Prestamo(
-            idPrestamo,
-            idUsuario,
-            idRecurso,
-            tipo,
-            fechaSolicitud,
-            fechaUso,
-            null,
-            "Pendiente"
+        Prestamo prestamo = new Prestamo(
+                "PR001",
+                "1001", // este será reemplazado por el usuario autenticado
+                recurso,
+                tipo,
+                LocalDateTime.now(),
+                fechaHoraInicio,
+                fechaHoraFin,
+                "Activo"
         );
 
-        prestamoService.registrarPrestamo(nuevo);
-        mostrarAlerta("Solicitud enviada correctamente.", Alert.AlertType.INFORMATION);
+        System.out.println("Préstamo registrado:");
+        System.out.println("Recurso: " + recurso);
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Inicio: " + fechaHoraInicio);
+        System.out.println("Fin: " + fechaHoraFin);
+        System.out.println("Motivo: " + motivo);
 
-        // Limpia el formulario
-        comboTipoPrestamo.setValue(null);
-        txtNombreSolicitante.clear();
-        comboRecurso.setValue(null);
-        fechaPrestamo.setValue(null);
-        comboHorario.setValue(null);
-        txtMotivo.clear();
+        mostrarAlerta("Préstamo registrado con éxito.", Alert.AlertType.INFORMATION);
+    }
+
+   @FXML
+    private void irAlMenuPrincipal(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/MenuPrincipal.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
-        alerta.setTitle("Resultado");
+        alerta.setTitle("Registro de Préstamo");
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
