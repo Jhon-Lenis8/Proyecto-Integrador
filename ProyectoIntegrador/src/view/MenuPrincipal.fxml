@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.MenuPrincipalController"
-            stylesheets="@/style.css">
+            stylesheets="@../style.css"
+            prefHeight="500.0" prefWidth="600.0"> <!-- Ajuste de tamaño -->
 
-   <top>
-      <Label text="MENÚ PRINCIPAL" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #006A71;" BorderPane.alignment="CENTER"/>
-   </top>
+  <top>
+    <Label text="MENÚ PRINCIPAL"
+           style="-fx-font-size:24px; -fx-font-weight:bold; -fx-text-fill:#006A71"
+           BorderPane.alignment="CENTER"/>
+  </top>
 
-   <center>
-      <VBox alignment="CENTER" spacing="15" styleClass="vbox" BorderPane.alignment="CENTER">
-         <Button fx:id="btnSolicitar" text="Solicitar Préstamo" />
-         <Button fx:id="btnHistorial" text="Historial de Préstamos" />
-         <Button fx:id="btnDisponibilidad" text="Ver Disponibilidad" />
-         <Button fx:id="btnRegistrarUsuario" text="Registrar Usuario" visible="false" />
-         <Button fx:id="btnSalir" text="Salir" />
-      </VBox>
-   </center>
+  <center>
+    <VBox alignment="CENTER" spacing="15" styleClass="vbox" BorderPane.alignment="CENTER">
+      <children>
+        <Button fx:id="btnSolicitar" text="Solicitar Préstamo" onAction="#abrirSolicitud"/>
+        <Button fx:id="btnHistorial" text="Historial de Préstamos" onAction="#abrirHistorial"/>
+        <Button fx:id="btnDisponibilidad" text="Ver Disponibilidad" onAction="#abrirDisponibilidad"/>
+        <Button fx:id="btnRegistrarUsuario" text="Registrar Usuario" onAction="#abrirRegistroUsuario"/>
+        <Button fx:id="btnSanciones" text="Gestionar Sanciones" onAction="#abrirSanciones"/>
+        <Button fx:id="btnSalir" text="Salir" onAction="#salirAplicacion"/> 
+      </children>
+    </VBox>
+  </center>
+
 </BorderPane>

@@ -3,52 +3,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/21" 
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.SolicitudController"
-            stylesheets="@/style.css">
+            stylesheets="@../style.css">
 
    <center>
       <VBox alignment="CENTER" spacing="12" styleClass="vbox" BorderPane.alignment="CENTER">
-         <Label text="Formulario de Préstamo" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+         <children>
+           <Label text="Formulario de Préstamo" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-         <HBox spacing="10">
-            <Label text="Tipo de préstamo" />
-            <ComboBox fx:id="comboTipo" prefWidth="200"/>
-         </HBox>
+           <HBox spacing="10">
+             <children>
+               <Label text="Tipo de préstamo" />
+               <ComboBox fx:id="comboTipo" prefWidth="200"/>
+             </children>
+           </HBox>
 
-         <HBox spacing="10">
-            <Label text="Solicitante" />
-            <TextField fx:id="txtNombreSolicitante" prefWidth="200"/>
-         </HBox>
+           <HBox spacing="10">
+             <children>
+               <Label text="Solicitante" />
+               <TextField fx:id="txtNombreSolicitante" prefWidth="200"/>
+             </children>
+           </HBox>
 
-         <HBox spacing="10">
-            <Label text="Tipo de equipo o sala" />
-            <ComboBox fx:id="comboEquipo" prefWidth="200"/>
-         </HBox>
+           <HBox spacing="10">
+             <children>
+               <Label text="Tipo de equipo o sala" />
+               <ComboBox fx:id="comboEquipo" prefWidth="200"/>
+             </children>
+           </HBox>
 
-         <HBox spacing="10">
-            <Label text="Fecha retiro" />
-            <DatePicker fx:id="fechaInicio" />
-            <ComboBox fx:id="horaInicio" prefWidth="80"/>
-         </HBox>
+           <HBox spacing="10">
+             <children>
+               <Label text="Fecha retiro" />
+               <DatePicker fx:id="fechaInicio" />
+               <ComboBox fx:id="horaInicio" prefWidth="80"/>
+             </children>
+           </HBox>
 
-         <HBox spacing="10">
-            <Label text="Fecha devolución" />
-            <DatePicker fx:id="fechaFin" />
-            <ComboBox fx:id="horaFin" prefWidth="80"/>
-         </HBox>
+           <HBox spacing="10">
+             <children>
+               <Label text="Fecha devolución" />
+               <DatePicker fx:id="fechaFin" />
+               <ComboBox fx:id="horaFin" prefWidth="80"/>
+             </children>
+           </HBox>
 
-         <HBox spacing="10">
-            <Label text="Motivo del préstamo" />
-            <TextArea fx:id="txtMotivo" prefRowCount="2" prefWidth="250"/>
-         </HBox>
+           <HBox spacing="10">
+             <children>
+               <Label text="Motivo del préstamo" />
+               <TextArea fx:id="txtMotivo" prefRowCount="2" prefWidth="250"/>
+             </children>
+           </HBox>
 
-         <HBox spacing="20" alignment="CENTER">
-            <Button fx:id="btnVolver" text="Menú principal" onAction="#irAlMenuPrincipal"/>
-            <Button fx:id="btnRegistrar" text="Registrar préstamo" onAction="#registrarPrestamo"/>
-         </HBox>
+           <HBox spacing="20" alignment="CENTER">
+             <children>
+               <Button fx:id="btnVolver" text="Menú principal" onAction="#irAlMenuPrincipal"/>
+               <Button fx:id="btnRegistrar" text="Registrar préstamo" onAction="#registrarPrestamo"/>
+             </children>
+           </HBox>
+         </children>
       </VBox>
    </center>
 </BorderPane>

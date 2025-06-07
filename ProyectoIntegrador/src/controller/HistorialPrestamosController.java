@@ -1,10 +1,16 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import model.Prestamo;
 
 import java.time.LocalDateTime;
@@ -87,5 +93,17 @@ public class HistorialPrestamosController {
         alerta.setTitle("Historial de Préstamos");
         alerta.setContentText(mensaje);
         alerta.showAndWait();
+    }
+    
+    @FXML
+    private void irAlMenuPrincipal(ActionEvent event) {
+        try {
+            Parent menuRoot = FXMLLoader
+                .load(getClass().getResource("/view/MenuPrincipal.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(menuRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

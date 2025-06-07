@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.SancionesController" stylesheets="@/source/style.css">
-    <top>
-        <Label text="Gestión de Sanciones" style="-fx-font-size: 24px; -fx-font-weight: bold;" BorderPane.alignment="CENTER"/>
-    </top>
-    <center>
-        <VBox spacing="10" alignment="CENTER">
-            <TableView fx:id="tablaSanciones" prefWidth="600" prefHeight="300">
-                <columns>
-                    <TableColumn fx:id="colMotivo" text="Motivo" prefWidth="300"/>
-                    <TableColumn fx:id="colFecha" text="Fecha" prefWidth="150"/>
-                    <TableColumn fx:id="colEstado" text="Estado" prefWidth="150"/>
-                </columns>
-            </TableView>
-            <Label fx:id="lblPoliticas" text="Políticas de sanciones: ..." style="-fx-font-style: italic;"/>
-        </VBox>
-    </center>
-    <bottom>
-        <HBox spacing="20" alignment="CENTER" BorderPane.alignment="CENTER">
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.SancionesController"
+            stylesheets="@../style.css">
+
+  <top>
+    <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+      <Label text="Gestión de Sanciones" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+      <Label fx:id="lblPoliticas" text="Aquí se mostrarán las políticas de sanción" wrapText="true" />
+    </VBox>
+  </top>
+
+  <center>
+    <VBox spacing="10" alignment="CENTER">
+      <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+      </padding>
+      <children>
+        <TableView fx:id="tablaSanciones" prefWidth="600" prefHeight="300">
+          <columns>
+            <TableColumn fx:id="colMotivo" text="Motivo" prefWidth="300"/>
+            <TableColumn fx:id="colFecha" text="Fecha" prefWidth="150"/>
+            <TableColumn fx:id="colEstado" text="Estado" prefWidth="150"/>
+          </columns>
+        </TableView>
+        <HBox spacing="10" alignment="CENTER">
+          <children>
             <Button fx:id="btnDarSancion" text="Dar Sanción" onAction="#darSancion"/>
-            <Button fx:id="btnVolver" text="Volver al Menú Principal" onAction="#volverAlMenu"/>
+            <Button fx:id="btnVolver" text="Menú Principal" onAction="#volverAlMenu"/>
+          </children>
         </HBox>
-    </bottom>
+      </children>
+    </VBox>
+  </center>
 </BorderPane>

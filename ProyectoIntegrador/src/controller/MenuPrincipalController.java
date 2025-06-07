@@ -1,65 +1,94 @@
-// controller/MenuPrincipalController.java
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import util.Session; // Asegúrate de tener esta clase en el paquete util
+
+import java.io.IOException;
 
 public class MenuPrincipalController {
 
     @FXML private Button btnSolicitar;
     @FXML private Button btnHistorial;
     @FXML private Button btnDisponibilidad;
-    @FXML private Button btnSalir;
-    @FXML private Button btnSanciones;   
-    @FXML private Button btnGestionUsuarios; 
     @FXML private Button btnRegistrarUsuario;
+    @FXML private Button btnSanciones;
+    @FXML private Button btnSalir;
 
-
-    private String tipoUsuario;
-    
-    public static String tipoUsuarioActivo = "Usuario"; // por defecto
-
+    /**
+     * Este método debe invocarse justo después de cargar el FXML:
+     * 
+     * FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MenuPrincipal.fxml"));
+     * Parent root = loader.load();
+     * MenuPrincipalController ctrl = loader.getController();
+     * ctrl.setTipoUsuario(rol);  // <-- aquí
+     *
+     * @param tipoUsuario "Administrador" o "Usuario"
+     */
+    public void setTipoUsuario(String tipoUsuario) {
+        boolean esAdmin = "Administrador".equals(tipoUsuario);
+        btnRegistrarUsuario.setVisible(esAdmin);
+        btnSanciones.setVisible(esAdmin);
+    }
 
     @FXML
     public void initialize() {
-        if (tipoUsuarioActivo.equals("Administrador")) {
-            btnRegistrarUsuario.setVisible(true);
-            btnRegistrarUsuario.setOnAction(e -> cambiarEscena(e, "/view/RegistroUsuario.fxml"));
-        }
-
-        btnSolicitar.setOnAction(e -> cambiarEscena(e, "/view/Solicitud.fxml"));
-        btnHistorial.setOnAction(e -> cambiarEscena(e, "/view/HistorialPrestamos.fxml"));
-        btnDisponibilidad.setOnAction(e -> mostrarDisponibilidadNoImplementada());
-        btnSalir.setOnAction(e -> salirAplicacion());
-    }
-
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-
-        if (tipoUsuario.equals("Usuario")) {
-            if (btnDisponibilidad != null) btnDisponibilidad.setVisible(false);
-            if (btnSanciones != null) btnSanciones.setVisible(false);
-            if (btnGestionUsuarios != null) btnGestionUsuarios.setVisible(false);
+        // Asegura que se configure la visibilidad incluso si volvemos desde otra vista
+        if (Session.tipoUsuario != null) {
+            setTipoUsuario(Session.tipoUsuario);
         }
     }
 
-    private void cambiarEscena(javafx.event.ActionEvent e, String rutaFXML) {
-        try {
-            javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(getClass().getResource(rutaFXML));
-            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) e.getSource()).getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(root));
-            stage.show();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+    @FXML
+    private void abrirSolicitud(ActionEvent evt) throws IOException {
+        cambiarEscena(evt, "/view/Solicitud.fxml");
+    }
+
+    @FXML
+    private void abrirHistorial(ActionEvent evt) throws IOException {
+        cambiarEscena(evt, "/view/Historial de prestamos.fxml");
+    }
+
+    @FXML
+    private void abrirDisponibilidad(ActionEvent evt) throws IOException {
+        cambiarEscena(evt, "/view/Disponibilidad.fxml");
+    }
+
+    @FXML
+    private void abrirRegistroUsuario(ActionEvent evt) throws IOException {
+        cambiarEscena(evt, "/view/RegistroUsuario.fxml");
+    }
+
+    @FXML
+    private void abrirSanciones(ActionEvent evt) throws IOException {
+        cambiarEscena(evt, "/view/Sanciones.fxml");
+    }
+
+    @FXML
+    private void salirAplicacion(ActionEvent evt) {
+        Stage stage = (Stage) btnSalir.getScene().getWindow();
+        stage.close();
+    }
+
+    /** Helper genérico para reemplazar la escena actual */
+    private void cambiarEscena(ActionEvent evt, String rutaFXML) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
+        Parent vista = loader.load();
+
+        // Si volvemos al menú, volvemos a pasar el tipo de usuario
+        if (rutaFXML.equals("/view/MenuPrincipal.fxml")) {
+            MenuPrincipalController ctrl = loader.getController();
+            ctrl.setTipoUsuario(Session.tipoUsuario);
         }
-    }
 
-    private void mostrarDisponibilidadNoImplementada() {
-        System.out.println("Funcionalidad aún no implementada.");
-    }
-
-    private void salirAplicacion() {
-        System.exit(0);
+        Stage stage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(vista));
+        stage.show();
     }
 }

@@ -8,4 +8,7 @@ module ProyectoIntegrador {
     exports controller;
 	
 	opens application to javafx.graphics, javafx.fxml;
+	
+	opens model to javafx.base;
+
 }

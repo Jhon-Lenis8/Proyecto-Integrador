@@ -2,14 +2,15 @@ package application;
 
 import data.LoginDAO;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
+import javafx.scene.Scene;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import controller.MenuPrincipalController;
+import util.Session; 
 
 public class SampleController {
 
@@ -23,7 +24,7 @@ public class SampleController {
     }
 
     private void procesarLogin(ActionEvent event) {
-        String usuario = txtUsuario.getText().trim();
+        String usuario   = txtUsuario.getText().trim();
         String contrasena = txtContraseña.getText();
 
         if (usuario.isEmpty() || contrasena.isEmpty()) {
@@ -31,16 +32,16 @@ public class SampleController {
             return;
         }
 
-        LoginDAO loginDAO = new LoginDAO();
-        String tipoUsuario = loginDAO.autenticar(usuario, contrasena);
-
+        String tipoUsuario = new LoginDAO().autenticar(usuario, contrasena);
         if (tipoUsuario != null) {
             try {
+                Session.tipoUsuario = tipoUsuario; // <- Guardamos el tipo de usuario globalmente
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MenuPrincipal.fxml"));
                 Parent root = loader.load();
 
-                MenuPrincipalController controller = loader.getController();
-                controller.setTipoUsuario(tipoUsuario);  // Inyectar tipo
+                MenuPrincipalController ctrl = loader.getController();
+                ctrl.setTipoUsuario(tipoUsuario); // También se lo pasamos al menú principal
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));

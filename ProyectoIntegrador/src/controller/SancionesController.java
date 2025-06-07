@@ -1,10 +1,16 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -73,15 +79,15 @@ public class SancionesController {
      * Aquí se implementa la lógica para cambiar de escena o volver a la vista del menú.
      */
     @FXML
-    private void volverAlMenu() {
-        // Implementa el cambio de escena según tu estructura. Por ejemplo:
-        System.out.println("Volver al Menú Principal");
-        // Ejemplo:
-        // Stage stage = (Stage) btnVolver.getScene().getWindow();
-        // Parent menuPrincipal = FXMLLoader.load(getClass().getResource("/path/MenuPrincipal.fxml"));
-        // stage.setScene(new Scene(menuPrincipal));
-    }
-
+    private void volverAlMenu(ActionEvent event) {
+    	   try {
+               Parent root = FXMLLoader.load(getClass().getResource("/view/MenuPrincipal.fxml"));
+               Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+               stage.setScene(new Scene(root));
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
     // Clase interna que representa una sanción.
     public static class Sancion {
         private String motivo;
