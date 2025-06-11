@@ -55,7 +55,7 @@ public class DisponibilidadController {
             while (rs.next()) {
                 String tipo = rs.getString("TIPO");
                 String estado = rs.getString("ESTADO");
-                recursos.add(new Recurso(tipo, estado, "Ubicación no disponible"));
+                recursos.add(new Recurso(tipo, estado));
             }
 
         } catch (SQLException e) {
