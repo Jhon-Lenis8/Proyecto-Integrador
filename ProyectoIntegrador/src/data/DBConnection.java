@@ -6,9 +6,18 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe"; 
-    private static final String USER = "proyecto";
-    private static final String PASSWORD = "proyecto";
+	// CONEXIÓN PARA UDI
+	/*
+	private static final String URL = "jdbc:oracle:thin:@192.168.254.215:1521:orcl"; 
+	private static final String USER = "proII";
+	private static final String PASSWORD = "proII";
+	*/
+
+	// CONEXIÓN LOCAL
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe"; 
+	private static final String USER = "proyecto";
+	private static final String PASSWORD = "proyecto";
+
 
     private static Connection connection;
 
